@@ -510,7 +510,7 @@ const SpeechTranscriptionApp = () => {
 									) : (
 										<div className="text-center space-y-2">
 											<MicOff className="w-8 h-8 mx-auto text-slate-400" />
-											<p>Click "Start Transcription" to begin</p>
+											<p>Click &quot;Start Transcription&quot; to begin</p>
 											<p className="text-xs">
 												Features: Timestamps • Confidence • Custom Vocabulary •
 												Endpoint Detection
@@ -684,7 +684,7 @@ const SpeechTranscriptionApp = () => {
 									</li>
 									<li>
 										<strong>Custom Vocabulary:</strong> Enhanced recognition for
-										"Titian System Solution"
+										&quot;Titian System Solution&quot;
 									</li>
 								</ul>
 								<ul className="list-disc list-inside space-y-1 ml-2">
