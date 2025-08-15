@@ -1,0 +1,48 @@
+# Docker files
+Dockerfile*
+.dockerignore
+docker-compose*.yml
+
+# Node.js
+node_modules
+npm-debug.log
+.next
+out
+build
+
+# Environment files
+.env
+.env.local
+.env.production.local
+.env.development.local
+.env.test.local
+
+# Version control
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDE and OS
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel
+
+# Logs
+logs
+*.log

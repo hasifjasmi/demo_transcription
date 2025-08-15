@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  # Next.js Frontend (Development)
+  nextjs-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps # Use only the deps stage for development
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev
+    depends_on:
+      - python-api-dev
+    networks:
+      - app-network
+
+  # Python FastAPI Backend (Development)
+  python-api-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - .:/app
+      # Mount for audio device access (if needed for local development)
+      - /dev/snd:/dev/snd
+    devices:
+      # Grant access to audio devices (for Linux/macOS)
+      - /dev/snd
+    privileged: true # Required for audio device access
+    command: uvicorn server:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

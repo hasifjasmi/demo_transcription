@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  # Next.js Frontend
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    depends_on:
+      - python-api
+    networks:
+      - app-network
+
+  # Python FastAPI Backend
+  python-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      # Mount for audio device access (if needed for local development)
+      - /dev/snd:/dev/snd
+    devices:
+      # Grant access to audio devices (for Linux/macOS)
+      - /dev/snd
+    privileged: true # Required for audio device access
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  audio-data:
